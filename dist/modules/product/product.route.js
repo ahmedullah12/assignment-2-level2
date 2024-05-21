@@ -15,4 +15,6 @@ router.get("/products", product_controller_1.ProductController.getProductsFromDB
 router.get("/products/:productId", product_controller_1.ProductController.getSingleProductFromDB);
 //update product
 router.put("/products/:productId", product_controller_1.ProductController.updateProductToDB);
+//update product
+router.delete("/products/:productId", product_controller_1.ProductController.deleteOneProductFromDB);
 exports.ProductRouter = router;

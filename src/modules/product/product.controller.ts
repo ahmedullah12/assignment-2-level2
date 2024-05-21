@@ -48,8 +48,17 @@ const updateProductToDB = async(req: Request, res: Response) => {
         const result = await ProductServices.updateProduct(id, zodParseData);
         res.status(200).json({success: true, message: "Product updated successfully!", data: result})
     }catch(err){
-        console.log(err);
         res.status(500).json({ success: false, message: "Failed to update the product", error: err });
+    }
+};
+
+const deleteOneProductFromDB = async(req: Request, res: Response) => {
+    try{
+        const id = req.params.productId;
+        const result = await ProductServices.deleteOneProduct(id);
+        res.status(200).json({success: true, message: "Product deleted successfully!", data: null})
+    }catch(err){
+        res.status(500).json({ success: false, message: "Failed to delete the product", error: err });
     }
 }
 
@@ -57,5 +66,6 @@ export const ProductController = {
     createProductToDB,
     getProductsFromDB,
     getSingleProductFromDB,
-    updateProductToDB
+    updateProductToDB,
+    deleteOneProductFromDB
 }

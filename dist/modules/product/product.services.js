@@ -28,9 +28,14 @@ const updateProduct = (productId, updatedProduct) => __awaiter(void 0, void 0, v
     const result = yield product_model_1.Product.findOneAndUpdate({ _id: new mongoose_1.Types.ObjectId(productId) }, updatedProduct);
     return result;
 });
+const deleteOneProduct = (productId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.deleteOne({ _id: new mongoose_1.Types.ObjectId(productId) });
+    return result;
+});
 exports.ProductServices = {
     createMovie,
     getProducts,
     getSingleProduct,
     updateProduct,
+    deleteOneProduct,
 };

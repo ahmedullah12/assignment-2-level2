@@ -59,13 +59,23 @@ const updateProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(200).json({ success: true, message: "Product updated successfully!", data: result });
     }
     catch (err) {
-        console.log(err);
         res.status(500).json({ success: false, message: "Failed to update the product", error: err });
+    }
+});
+const deleteOneProductFromDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const result = yield product_services_1.ProductServices.deleteOneProduct(id);
+        res.status(200).json({ success: true, message: "Product deleted successfully!", data: null });
+    }
+    catch (err) {
+        res.status(500).json({ success: false, message: "Failed to delete the product", error: err });
     }
 });
 exports.ProductController = {
     createProductToDB,
     getProductsFromDB,
     getSingleProductFromDB,
-    updateProductToDB
+    updateProductToDB,
+    deleteOneProductFromDB
 };
