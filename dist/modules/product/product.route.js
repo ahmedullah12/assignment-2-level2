@@ -13,4 +13,6 @@ router.post("/products", product_controller_1.ProductController.createProductToD
 router.get("/products", product_controller_1.ProductController.getProductsFromDB);
 //get single product
 router.get("/products/:productId", product_controller_1.ProductController.getSingleProductFromDB);
+//update product
+router.put("/products/:productId", product_controller_1.ProductController.updateProductToDB);
 exports.ProductRouter = router;

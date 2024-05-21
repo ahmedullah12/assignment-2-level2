@@ -38,10 +38,24 @@ const getSingleProductFromDB = async(req: Request, res: Response) => {
     }catch(err){
         res.status(500).json({ success: false, message: "Failed to fetch product", error: err });
     }
+};
+
+const updateProductToDB = async(req: Request, res: Response) => {
+    try{
+        const id = req.params.productId
+        const product = req.body;
+        const zodParseData = productSchema.parse(product);
+        const result = await ProductServices.updateProduct(id, zodParseData);
+        res.status(200).json({success: true, message: "Product updated successfully!", data: result})
+    }catch(err){
+        console.log(err);
+        res.status(500).json({ success: false, message: "Failed to update the product", error: err });
+    }
 }
 
 export const ProductController = {
     createProductToDB,
     getProductsFromDB,
-    getSingleProductFromDB
+    getSingleProductFromDB,
+    updateProductToDB
 }

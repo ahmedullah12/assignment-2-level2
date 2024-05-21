@@ -15,10 +15,16 @@ const getProducts = async() => {
 const getSingleProduct = async(productId: string) => {
     const result = await Product.findOne({_id: new Types.ObjectId(productId)});
     return result;
+};
+
+const updateProduct = async(productId: string, updatedProduct: TProduct) => {
+    const result = await Product.findOneAndUpdate({_id: new Types.ObjectId(productId)}, updatedProduct);
+    return result;
 }
 
 export const ProductServices = {
     createMovie,
     getProducts,
     getSingleProduct,
+    updateProduct,
 }

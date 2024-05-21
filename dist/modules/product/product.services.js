@@ -24,8 +24,13 @@ const getSingleProduct = (productId) => __awaiter(void 0, void 0, void 0, functi
     const result = yield product_model_1.Product.findOne({ _id: new mongoose_1.Types.ObjectId(productId) });
     return result;
 });
+const updateProduct = (productId, updatedProduct) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.findOneAndUpdate({ _id: new mongoose_1.Types.ObjectId(productId) }, updatedProduct);
+    return result;
+});
 exports.ProductServices = {
     createMovie,
     getProducts,
     getSingleProduct,
+    updateProduct,
 };

@@ -50,8 +50,22 @@ const getSingleProductFromDB = (req, res) => __awaiter(void 0, void 0, void 0, f
         res.status(500).json({ success: false, message: "Failed to fetch product", error: err });
     }
 });
+const updateProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const product = req.body;
+        const zodParseData = product_zod_validation_1.default.parse(product);
+        const result = yield product_services_1.ProductServices.updateProduct(id, zodParseData);
+        res.status(200).json({ success: true, message: "Product updated successfully!", data: result });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false, message: "Failed to update the product", error: err });
+    }
+});
 exports.ProductController = {
     createProductToDB,
     getProductsFromDB,
-    getSingleProductFromDB
+    getSingleProductFromDB,
+    updateProductToDB
 };
