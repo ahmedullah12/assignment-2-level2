@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ProductServices } from "./product.services";
 import productSchema from "./product.zod.validation";
 
+// product creating
 const createProductToDB = async(req: Request, res: Response) => {
     try{
         
@@ -20,6 +21,16 @@ const createProductToDB = async(req: Request, res: Response) => {
     }
 };
 
+const getProductsFromDB = async(req: Request, res: Response) => {
+    try{
+        const result = await ProductServices.getProducts();
+        res.status(200).json({success: true, message: "Products fetched successfully!", data: result})
+    }catch(err){
+        res.status(500).json({ success: false, message: "Failed to fetch products", error: err });
+    }
+}
+
 export const ProductController = {
     createProductToDB,
+    getProductsFromDB,
 }
