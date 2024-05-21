@@ -28,9 +28,20 @@ const getProductsFromDB = async(req: Request, res: Response) => {
     }catch(err){
         res.status(500).json({ success: false, message: "Failed to fetch products", error: err });
     }
+};
+
+const getSingleProductFromDB = async(req: Request, res: Response) => {
+    try{
+        const id = req.params.productId;
+        const result = await ProductServices.getSingleProduct(id);
+        res.status(200).json({success: true, message: "Product fetched successfully!", data: result})
+    }catch(err){
+        res.status(500).json({ success: false, message: "Failed to fetch product", error: err });
+    }
 }
 
 export const ProductController = {
     createProductToDB,
     getProductsFromDB,
+    getSingleProductFromDB
 }

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const product_services_1 = require("./product.services");
 const product_zod_validation_1 = __importDefault(require("./product.zod.validation"));
+// product creating
 const createProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const product = req.body;
@@ -30,6 +31,27 @@ const createProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({ success: false, message: "Product creating failed.", error: err });
     }
 });
+const getProductsFromDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield product_services_1.ProductServices.getProducts();
+        res.status(200).json({ success: true, message: "Products fetched successfully!", data: result });
+    }
+    catch (err) {
+        res.status(500).json({ success: false, message: "Failed to fetch products", error: err });
+    }
+});
+const getSingleProductFromDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const result = yield product_services_1.ProductServices.getSingleProduct(id);
+        res.status(200).json({ success: true, message: "Product fetched successfully!", data: result });
+    }
+    catch (err) {
+        res.status(500).json({ success: false, message: "Failed to fetch product", error: err });
+    }
+});
 exports.ProductController = {
     createProductToDB,
+    getProductsFromDB,
+    getSingleProductFromDB
 };

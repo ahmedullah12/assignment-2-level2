@@ -10,11 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductServices = void 0;
+const mongoose_1 = require("mongoose");
 const product_model_1 = require("./product.model");
 const createMovie = (product) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield product_model_1.Product.create(product);
     return result;
 });
+const getProducts = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.find();
+    return result;
+});
+const getSingleProduct = (productId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.findOne({ _id: new mongoose_1.Types.ObjectId(productId) });
+    return result;
+});
 exports.ProductServices = {
     createMovie,
+    getProducts,
+    getSingleProduct,
 };
