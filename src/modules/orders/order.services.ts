@@ -11,8 +11,14 @@ const getOrder = () => {
     return result;
 }
 
+const getOrderWithEmail = (email: string) => {
+    const result = Order.find({email: email});
+    return result;
+}
+
 
 export const OrderServices = {
     createOrder,
-    getOrder
+    getOrder,
+    getOrderWithEmail
 }

@@ -10,7 +10,12 @@ const getOrder = () => {
     const result = order_model_1.Order.find();
     return result;
 };
+const getOrderWithEmail = (email) => {
+    const result = order_model_1.Order.find({ email: email });
+    return result;
+};
 exports.OrderServices = {
     createOrder,
-    getOrder
+    getOrder,
+    getOrderWithEmail
 };
