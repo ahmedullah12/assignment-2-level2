@@ -12,7 +12,7 @@ const createOrderToDB = async (req: Request, res: Response) => {
         success: false,
         message: 'Product ID is not a valid product ID',
       });
-    } 
+    }
     const product = await Product.findById(order.productId);
 
     if (!product) {
@@ -46,21 +46,33 @@ const createOrderToDB = async (req: Request, res: Response) => {
   }
 };
 
-const getOrderFromDB = async(req: Request, res: Response) => {
-  const email : string | undefined = req.query.email as string;
-  if(email){
+const getOrderFromDB = async (req: Request, res: Response) => {
+  const email: string | undefined = req.query.email as string;
+  if (email) {
     const result = await OrderServices.getOrderWithEmail(email);
-    if(result.length > 0){
-      res.status(200).json({success: true, message: "Orders fetched successfully for user email!", data: result});
+    if (result.length > 0) {
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: 'Orders fetched successfully for user email!',
+          data: result,
+        });
       return;
     }
-    return res.status(404).json({success: false, message: "Order not found"})
+    return res.status(404).json({ success: false, message: 'Order not found' });
   }
   const result = await OrderServices.getOrder();
-  res.status(200).json({success: true, message: "Orders fetched successfully!", data: result})
-}
+  res
+    .status(200)
+    .json({
+      success: true,
+      message: 'Orders fetched successfully!',
+      data: result,
+    });
+};
 
 export const OrderController = {
   createOrderToDB,
-  getOrderFromDB
+  getOrderFromDB,
 };

@@ -4,13 +4,11 @@ export type TVariants = {
   value: string;
 };
 
-
 //type for Inventory
 export type TInventory = {
   quantity: number;
   inStock: boolean;
 };
-
 
 //type for Product
 export type TProduct = {
@@ -22,4 +20,3 @@ export type TProduct = {
   variants: TVariants[];
   inventory: TInventory;
 };
- 

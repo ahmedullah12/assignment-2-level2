@@ -28,9 +28,7 @@ const createProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
     catch (err) {
-        res
-            .status(500)
-            .json({
+        res.status(500).json({
             success: false,
             message: 'Product creating failed.',
             error: err,
@@ -43,30 +41,26 @@ const getProductsFromDB = (req, res) => __awaiter(void 0, void 0, void 0, functi
         if (searchTerm) {
             const result = yield product_services_1.ProductServices.getProductsWithSearchTerm(searchTerm);
             if (result.length > 0) {
-                res
-                    .status(200)
-                    .json({
+                res.status(200).json({
                     success: true,
                     message: `Products matching search term ${searchTerm} fetched successfully!`,
                     data: result,
                 });
                 return;
             }
-            return res.status(404).json({ success: false, message: "Product not found" });
+            return res
+                .status(404)
+                .json({ success: false, message: 'Product not found' });
         }
         const result = yield product_services_1.ProductServices.getProducts();
-        res
-            .status(200)
-            .json({
+        res.status(200).json({
             success: true,
             message: 'Products fetched successfully!',
             data: result,
         });
     }
     catch (err) {
-        res
-            .status(500)
-            .json({
+        res.status(500).json({
             success: false,
             message: 'Failed to fetch products',
             error: err,
@@ -77,9 +71,7 @@ const getSingleProductFromDB = (req, res) => __awaiter(void 0, void 0, void 0, f
     try {
         const id = req.params.productId;
         const result = yield product_services_1.ProductServices.getSingleProduct(id);
-        res
-            .status(200)
-            .json({
+        res.status(200).json({
             success: true,
             message: 'Product fetched successfully!',
             data: result,
@@ -97,18 +89,14 @@ const updateProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, functi
         const product = req.body;
         const zodParseData = product_zod_validation_1.default.parse(product);
         const result = yield product_services_1.ProductServices.updateProduct(id, zodParseData);
-        res
-            .status(200)
-            .json({
+        res.status(200).json({
             success: true,
             message: 'Product updated successfully!',
             data: zodParseData,
         });
     }
     catch (err) {
-        res
-            .status(500)
-            .json({
+        res.status(500).json({
             success: false,
             message: 'Failed to update the product',
             error: err,
@@ -119,18 +107,14 @@ const deleteOneProductFromDB = (req, res) => __awaiter(void 0, void 0, void 0, f
     try {
         const id = req.params.productId;
         const result = yield product_services_1.ProductServices.deleteOneProduct(id);
-        res
-            .status(200)
-            .json({
+        res.status(200).json({
             success: true,
             message: 'Product deleted successfully!',
             data: null,
         });
     }
     catch (err) {
-        res
-            .status(500)
-            .json({
+        res.status(500).json({
             success: false,
             message: 'Failed to delete the product',
             error: err,

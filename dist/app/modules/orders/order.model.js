@@ -25,4 +25,4 @@ orderSchema.statics.isProductValid = function (productId) {
         return !!product;
     });
 };
-exports.Order = (0, mongoose_1.model)("Order", orderSchema);
+exports.Order = (0, mongoose_1.model)('Order', orderSchema);

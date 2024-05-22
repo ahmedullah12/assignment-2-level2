@@ -11,8 +11,8 @@ const app = (0, express_1.default)();
 //middlewares
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-app.use("/api", product_route_1.ProductRouter);
-app.use("/api", order_route_1.OrderRouter);
+app.use('/api', product_route_1.ProductRouter);
+app.use('/api', order_route_1.OrderRouter);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });

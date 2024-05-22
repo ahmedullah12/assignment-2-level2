@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { Model } from 'mongoose';
 
 export type TOrder = {
   email: string;
@@ -7,10 +7,7 @@ export type TOrder = {
   quantity: number;
 };
 
-
 // type for isProductValid
-export interface isProductValid extends Model<TOrder>{
+export interface isProductValid extends Model<TOrder> {
   isProductValid(productId: string): Promise<boolean>;
 }
-
-

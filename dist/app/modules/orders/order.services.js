@@ -17,5 +17,5 @@ const getOrderWithEmail = (email) => {
 exports.OrderServices = {
     createOrder,
     getOrder,
-    getOrderWithEmail
+    getOrderWithEmail,
 };

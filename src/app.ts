@@ -6,10 +6,10 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-app.use("/api", ProductRouter);
-app.use("/api", OrderRouter);
+app.use('/api', ProductRouter);
+app.use('/api', OrderRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
