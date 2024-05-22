@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { ProductRouter } from './modules/product/product.route';
-import { OrderRouter } from './modules/orders/order.route';
+import { ProductRouter } from './app/modules/product/product.route';
+import { OrderRouter } from './app/modules/orders/order.route';
 const app = express();
 
 //middlewares
