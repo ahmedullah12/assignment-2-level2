@@ -6,7 +6,13 @@ const createOrder = (order: TOrder) => {
     return result;
 };
 
+const getOrder = () => {
+    const result = Order.find();
+    return result;
+}
+
 
 export const OrderServices = {
-    createOrder
+    createOrder,
+    getOrder
 }

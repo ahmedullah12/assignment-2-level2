@@ -12,13 +12,27 @@ const getProducts = async() => {
     return result;
 };
 
+const getProductsWithSearchTerm = async(searchTerm: string) => {
+
+    const filter = {
+        $or: [
+            { name: { $regex: searchTerm, $options: 'ix' } },
+            { category: { $regex: searchTerm, $options: 'ix' } },
+            { description: { $regex: searchTerm, $options: 'ix' } }
+        ]
+    };
+
+    const result = await Product.find(filter);
+    return result;
+}
+
 const getSingleProduct = async(productId: string) => {
     const result = await Product.findOne({_id: new Types.ObjectId(productId)});
     return result;
 };
 
 const updateProduct = async(productId: string, updatedProduct: TProduct) => {
-    const result = await Product.findOneAndUpdate({_id: new Types.ObjectId(productId)}, updatedProduct);
+    const result = await Product.updateOne({_id: new Types.ObjectId(productId)}, updatedProduct);
     return result;
 };
 
@@ -33,4 +47,5 @@ export const ProductServices = {
     getSingleProduct,
     updateProduct,
     deleteOneProduct,
+    getProductsWithSearchTerm
 }

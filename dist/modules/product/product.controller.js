@@ -23,31 +23,72 @@ const createProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, functi
         const result = yield product_services_1.ProductServices.createMovie(zodParseData);
         res.status(200).json({
             success: true,
-            message: "Product created successfully!",
+            message: 'Product created successfully!',
             data: result,
         });
     }
     catch (err) {
-        res.status(500).json({ success: false, message: "Product creating failed.", error: err });
+        res
+            .status(500)
+            .json({
+            success: false,
+            message: 'Product creating failed.',
+            error: err,
+        });
     }
 });
 const getProductsFromDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const searchTerm = req.query.searchTerm;
+        if (searchTerm) {
+            const result = yield product_services_1.ProductServices.getProductsWithSearchTerm(searchTerm);
+            if (result.length > 0) {
+                res
+                    .status(200)
+                    .json({
+                    success: true,
+                    message: `Products matching search term ${searchTerm} fetched successfully!`,
+                    data: result,
+                });
+                return;
+            }
+            return res.status(404).json({ success: false, message: "Product not found" });
+        }
         const result = yield product_services_1.ProductServices.getProducts();
-        res.status(200).json({ success: true, message: "Products fetched successfully!", data: result });
+        res
+            .status(200)
+            .json({
+            success: true,
+            message: 'Products fetched successfully!',
+            data: result,
+        });
     }
     catch (err) {
-        res.status(500).json({ success: false, message: "Failed to fetch products", error: err });
+        res
+            .status(500)
+            .json({
+            success: false,
+            message: 'Failed to fetch products',
+            error: err,
+        });
     }
 });
 const getSingleProductFromDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.productId;
         const result = yield product_services_1.ProductServices.getSingleProduct(id);
-        res.status(200).json({ success: true, message: "Product fetched successfully!", data: result });
+        res
+            .status(200)
+            .json({
+            success: true,
+            message: 'Product fetched successfully!',
+            data: result,
+        });
     }
     catch (err) {
-        res.status(500).json({ success: false, message: "Failed to fetch product", error: err });
+        res
+            .status(500)
+            .json({ success: false, message: 'Failed to fetch product', error: err });
     }
 });
 const updateProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,20 +97,44 @@ const updateProductToDB = (req, res) => __awaiter(void 0, void 0, void 0, functi
         const product = req.body;
         const zodParseData = product_zod_validation_1.default.parse(product);
         const result = yield product_services_1.ProductServices.updateProduct(id, zodParseData);
-        res.status(200).json({ success: true, message: "Product updated successfully!", data: result });
+        res
+            .status(200)
+            .json({
+            success: true,
+            message: 'Product updated successfully!',
+            data: zodParseData,
+        });
     }
     catch (err) {
-        res.status(500).json({ success: false, message: "Failed to update the product", error: err });
+        res
+            .status(500)
+            .json({
+            success: false,
+            message: 'Failed to update the product',
+            error: err,
+        });
     }
 });
 const deleteOneProductFromDB = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.productId;
         const result = yield product_services_1.ProductServices.deleteOneProduct(id);
-        res.status(200).json({ success: true, message: "Product deleted successfully!", data: null });
+        res
+            .status(200)
+            .json({
+            success: true,
+            message: 'Product deleted successfully!',
+            data: null,
+        });
     }
     catch (err) {
-        res.status(500).json({ success: false, message: "Failed to delete the product", error: err });
+        res
+            .status(500)
+            .json({
+            success: false,
+            message: 'Failed to delete the product',
+            error: err,
+        });
     }
 });
 exports.ProductController = {
@@ -77,5 +142,5 @@ exports.ProductController = {
     getProductsFromDB,
     getSingleProductFromDB,
     updateProductToDB,
-    deleteOneProductFromDB
+    deleteOneProductFromDB,
 };

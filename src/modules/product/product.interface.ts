@@ -22,3 +22,4 @@ export type TProduct = {
   variants: TVariants[];
   inventory: TInventory;
 };
+ 

@@ -6,6 +6,11 @@ const createOrder = (order) => {
     const result = order_model_1.Order.create(order);
     return result;
 };
+const getOrder = () => {
+    const result = order_model_1.Order.find();
+    return result;
+};
 exports.OrderServices = {
-    createOrder
+    createOrder,
+    getOrder
 };

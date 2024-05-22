@@ -20,12 +20,23 @@ const getProducts = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield product_model_1.Product.find();
     return result;
 });
+const getProductsWithSearchTerm = (searchTerm) => __awaiter(void 0, void 0, void 0, function* () {
+    const filter = {
+        $or: [
+            { name: { $regex: searchTerm, $options: 'ix' } },
+            { category: { $regex: searchTerm, $options: 'ix' } },
+            { description: { $regex: searchTerm, $options: 'ix' } }
+        ]
+    };
+    const result = yield product_model_1.Product.find(filter);
+    return result;
+});
 const getSingleProduct = (productId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield product_model_1.Product.findOne({ _id: new mongoose_1.Types.ObjectId(productId) });
     return result;
 });
 const updateProduct = (productId, updatedProduct) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield product_model_1.Product.findOneAndUpdate({ _id: new mongoose_1.Types.ObjectId(productId) }, updatedProduct);
+    const result = yield product_model_1.Product.updateOne({ _id: new mongoose_1.Types.ObjectId(productId) }, updatedProduct);
     return result;
 });
 const deleteOneProduct = (productId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -38,4 +49,5 @@ exports.ProductServices = {
     getSingleProduct,
     updateProduct,
     deleteOneProduct,
+    getProductsWithSearchTerm
 };
