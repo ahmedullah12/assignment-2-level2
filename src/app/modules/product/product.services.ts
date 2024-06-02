@@ -13,11 +13,13 @@ const getProducts = async () => {
 };
 
 const getProductsWithSearchTerm = async (searchTerm: string) => {
+  //searchTerm space issue fixed
+  const escapedSearchTerm = searchTerm.replace(/\s+/g, '\\s*');
   const filter = {
     $or: [
-      { name: { $regex: searchTerm, $options: 'ix' } },
-      { category: { $regex: searchTerm, $options: 'ix' } },
-      { description: { $regex: searchTerm, $options: 'ix' } },
+      { name: { $regex: escapedSearchTerm, $options: 'xi' } },
+      { category: { $regex: escapedSearchTerm, $options: 'xi' } },
+      { description: { $regex: escapedSearchTerm, $options: 'xi' } },
     ],
   };
 
